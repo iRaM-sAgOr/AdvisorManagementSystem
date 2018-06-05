@@ -27,38 +27,18 @@
 
 <body>
 	  <div id="main-wrapper">
-		 <center><h2>Student Profile Page</h2></center>
+		 <center><h2>Student Under Your Supervision Sir</h2></center>
 		 <center><h3>Welcome <?php echo $_SESSION['username']; ?></h3></center>
 		
 		 <form action="" method="post">
-      <div class="imgcontainer">
-      <?php
-      $pp=$_SESSION['tid'];
-     
-     $query="select pic from teacher where tid='$pp' ";
-         $query_run = mysqli_query($con,$query);
-          while($data=mysqli_fetch_array($query_run)){
-             
-            // echo "<img src="$data['pic']" >;
-            $image=$data['pic'];
-              // echo '<img src="imgs/.$image" alt="Avatar" class="avatar">';
-             // echo "<img src='imgs/".$image."'>";
-               echo "<img src=imgs/".$image." width=100 height=100 alt=Loading!! class ='avatar'>";
-    }
-                  
-         
-       
-                
-           
-       
-      ?>
-			 
-</div>
+			  <div class="imgcontainer">
+				 <img src="imgs/t.png" alt="Avatar" class="avatar">
+			  </div>
+
    <table>
     <tr>
-      <th>NO</th> 
      <th>Student-Name</th> 
-     <th>Id</th>
+     <th>Student-Id</th>
     </tr>
 
  <?php
@@ -66,21 +46,13 @@
        if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
        } 
-        $sql = "SELECT  username, sid FROM userinfotbl where tid='$pp' ";
+        $sql = "SELECT  username, sid FROM userinfotbl ";
         $result = $con->query($sql);
       if ($result->num_rows > 0) {
    // output data of each row
-      $no=0;
-      $teacher="teacher";
-       $_SESSION['teacher']=$teacher;
       while($row = $result->fetch_assoc())
      {
-     	$no++;
-      echo "</td><td>" . $no ."</td><td>" . "<a href='student_profile_view.php'>".$row["username"]."</a>" . "</td><td>". $row["sid"]. "</td></tr>";
-      $_SESSION['sid']=$row['sid'];
-      $_SESSION['username']=$row['username'];
-      //echo $_SESSION['teacher'];
-     
+      echo "</td><td>" . $row["username"] . "</td><td>". $row["sid"]. "</td></tr>";
       }
    echo "</table>";
       } 

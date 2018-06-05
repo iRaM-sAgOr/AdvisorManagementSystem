@@ -44,6 +44,7 @@
 				<br></br>
 
          <?php
+         ///Dynamically fetch the current registered teachers name by admin........
          $query="select * from teachers_identity";
          $query_run = mysqli_query($con,$query);
          echo "<select name='sir'>";
@@ -95,8 +96,9 @@
 						}
 						else
 						{
-                         $pic=$_FILES['pic']['name'];
-                         $target = "imgs/".basename($pic);
+							//Photo file upladed in a folder for furthe requirement.Not to fetch from database directly.from the folder of the server.
+                         $pic=$_FILES['pic']['name'];//pic is the name attribute of image option 
+                         $target = "imgs/".basename($pic);//imgs is the folder name.
                          
                          $uploadOk=1;
                          //////////////size check...............
@@ -110,7 +112,7 @@
                          $uploadOk = 0;
                          }
                         ///////////////////.......................&& move_uploaded_file($_FILES['pic']['tmp_name'], $target)
-                            if(move_uploaded_file($_FILES['pic']['tmp_name'], $target) && $uploadOk==1)
+                            if(move_uploaded_file($_FILES['pic']['tmp_name'], $target) && $uploadOk==1)//if the file is uploaded in the imgs folder then okay and size ,type also
                             {
 							$query = "INSERT  into student_request values('$username','$password','$email','$sid','$tel','$pic','$type')";
 							$query_run = mysqli_query($con,$query);
